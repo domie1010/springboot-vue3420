@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.CaigouMapper">
+  <resultMap id="BaseResultMap" type="com.entity.Caigou">
+    <id column="id" jdbcType="INTEGER" property="id" />
+	<result column="shangpinbianhao" jdbcType="VARCHAR" property="shangpinbianhao" />    <result column="shangpinmingcheng" jdbcType="VARCHAR" property="shangpinmingcheng" />    <result column="leibie" jdbcType="VARCHAR" property="leibie" />    <result column="kucun" jdbcType="VARCHAR" property="kucun" />    <result column="gongyingshang" jdbcType="VARCHAR" property="gongyingshang" />    <result column="caigoushuliang" jdbcType="VARCHAR" property="caigoushuliang" />    <result column="caigoushijian" jdbcType="VARCHAR" property="caigoushijian" />    <result column="caigouyuan" jdbcType="VARCHAR" property="caigouyuan" />    <result column="tuihuoshuliang" jdbcType="VARCHAR" property="tuihuoshuliang" />    <result column="tuihuoyuanyin" jdbcType="VARCHAR" property="tuihuoyuanyin" />    
+    <result column="addtime" jdbcType="VARCHAR" property="addtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, shangpinbianhao,shangpinmingcheng,leibie,kucun,gongyingshang,caigoushuliang,caigoushijian,caigouyuan,tuihuoshuliang,tuihuoyuanyin, addtime
+  </sql>
+  <select id="quchongCaigou"  parameterType="java.util.Map" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from caigou 
+    where caigouyuan = #{caigouyuan,jdbcType=VARCHAR} limit 0,1
+  </select>
+ <select id="getCount"   resultType="int" parameterType="java.util.Map" >
+    select  count(*) from caigou  where 1=1
+    <if test="shangpinbianhao!=null">and shangpinbianhao like  concat('%',#{shangpinbianhao,jdbcType=VARCHAR},'%')</if>     <if test="shangpinmingcheng!=null">and shangpinmingcheng like  concat('%',#{shangpinmingcheng,jdbcType=VARCHAR},'%')</if>     <if test="leibie!=null">and leibie like  concat('%',#{leibie,jdbcType=VARCHAR},'%')</if>     <if test="kucun!=null">and kucun like  concat('%',#{kucun,jdbcType=VARCHAR},'%')</if>     <if test="gongyingshang!=null">and gongyingshang like  concat('%',#{gongyingshang,jdbcType=VARCHAR},'%')</if>     <if test="caigoushuliang1!=null">and caigoushuliang &gt;=  concat('',#{caigoushuliang1,jdbcType=VARCHAR},'')</if>     <if test="caigoushuliang2!=null">and caigoushuliang &lt;=  concat('',#{caigoushuliang2,jdbcType=VARCHAR},'')</if>     <if test="caigoushijian1!=null">and caigoushijian &gt;=  concat('',#{caigoushijian1,jdbcType=VARCHAR},'')</if>     <if test="caigoushijian2!=null">and caigoushijian &lt;=  concat('',#{caigoushijian2,jdbcType=VARCHAR},'')</if>     <if test="caigouyuan!=null">and caigouyuan like  concat('%',#{caigouyuan,jdbcType=VARCHAR},'%')</if>     <if test="tuihuoshuliang!=null">and tuihuoshuliang like  concat('%',#{tuihuoshuliang,jdbcType=VARCHAR},'%')</if>     <if test="tuihuoyuanyin!=null">and tuihuoyuanyin like  concat('%',#{tuihuoyuanyin,jdbcType=VARCHAR},'%')</if>     
+  </select> 
+  <select id="getAll"   resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select   <include refid="Base_Column_List" /> from caigou  where 1=1
+    <if test="caigouyuan!=null">
+    and caigouyuan =#{caigouyuan}
+    </if>
+  </select>
+  
+  <select id="getsycaigou1"   resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select   <include refid="Base_Column_List" /> from caigou  where 1=1
+    limit 0,5
+  </select>
+  <select id="getsycaigou2"   resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select   <include refid="Base_Column_List" /> from caigou  where 1=1
+    limit 0,5
+  </select>
+  <select id="getsycaigou3"   resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select   <include refid="Base_Column_List" /> from caigou  where 1=1
+    limit 0,5
+  </select>
+  
+   <select id="getByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+     select  <include refid="Base_Column_List" /> 
+     from caigou where 1=1 
+     <if test="shangpinbianhao!=null">and shangpinbianhao like  concat('%',#{shangpinbianhao,jdbcType=VARCHAR},'%')</if>     <if test="shangpinmingcheng!=null">and shangpinmingcheng like  concat('%',#{shangpinmingcheng,jdbcType=VARCHAR},'%')</if>     <if test="leibie!=null">and leibie like  concat('%',#{leibie,jdbcType=VARCHAR},'%')</if>     <if test="kucun!=null">and kucun like  concat('%',#{kucun,jdbcType=VARCHAR},'%')</if>     <if test="gongyingshang!=null">and gongyingshang like  concat('%',#{gongyingshang,jdbcType=VARCHAR},'%')</if>     <if test="caigoushuliang1!=null">and caigoushuliang &gt;=  concat('',#{caigoushuliang1,jdbcType=VARCHAR},'')</if>     <if test="caigoushuliang2!=null">and caigoushuliang &lt;=  concat('',#{caigoushuliang2,jdbcType=VARCHAR},'')</if>     <if test="caigoushijian1!=null">and caigoushijian &gt;=  concat('',#{caigoushijian1,jdbcType=VARCHAR},'')</if>     <if test="caigoushijian2!=null">and caigoushijian &lt;=  concat('',#{caigoushijian2,jdbcType=VARCHAR},'')</if>     <if test="caigouyuan!=null">and caigouyuan like  concat('%',#{caigouyuan,jdbcType=VARCHAR},'%')</if>     <if test="tuihuoshuliang!=null">and tuihuoshuliang like  concat('%',#{tuihuoshuliang,jdbcType=VARCHAR},'%')</if>     <if test="tuihuoyuanyin!=null">and tuihuoyuanyin like  concat('%',#{tuihuoyuanyin,jdbcType=VARCHAR},'%')</if>     
+	 order by id desc
+     <if test="pageno!=null and pageSize!=null">
+     limit #{pageno},#{pageSize}
+     </if>
+     </select>
+	 
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from caigou
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from caigou
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.entity.Caigou">
+    insert into caigou (id, shangpinbianhao,shangpinmingcheng,leibie,kucun,gongyingshang,caigoushuliang,caigoushijian,caigouyuan,tuihuoshuliang,tuihuoyuanyin, addtime)
+    values (#{id,jdbcType=INTEGER}, #{shangpinbianhao,jdbcType=VARCHAR},#{shangpinmingcheng,jdbcType=VARCHAR},#{leibie,jdbcType=VARCHAR},#{kucun,jdbcType=VARCHAR},#{gongyingshang,jdbcType=VARCHAR},#{caigoushuliang,jdbcType=VARCHAR},#{caigoushijian,jdbcType=VARCHAR},#{caigouyuan,jdbcType=VARCHAR},#{tuihuoshuliang,jdbcType=VARCHAR},#{tuihuoyuanyin,jdbcType=VARCHAR}, #{addtime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Caigou">
+    insert into caigou
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="shangpinbianhao != null"> shangpinbianhao, </if>      <if test="shangpinmingcheng != null"> shangpinmingcheng, </if>      <if test="leibie != null"> leibie, </if>      <if test="kucun != null"> kucun, </if>      <if test="gongyingshang != null"> gongyingshang, </if>      <if test="caigoushuliang != null"> caigoushuliang, </if>      <if test="caigoushijian != null"> caigoushijian, </if>      <if test="caigouyuan != null"> caigouyuan, </if>      <if test="tuihuoshuliang != null"> tuihuoshuliang, </if>      <if test="tuihuoyuanyin != null"> tuihuoyuanyin, </if>      
+      <if test="addtime != null">
+        addtime,
+      </if>
+      
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="shangpinbianhao != null"> #{shangpinbianhao,jdbcType=VARCHAR},</if>      <if test="shangpinmingcheng != null"> #{shangpinmingcheng,jdbcType=VARCHAR},</if>      <if test="leibie != null"> #{leibie,jdbcType=VARCHAR},</if>      <if test="kucun != null"> #{kucun,jdbcType=VARCHAR},</if>      <if test="gongyingshang != null"> #{gongyingshang,jdbcType=VARCHAR},</if>      <if test="caigoushuliang != null"> #{caigoushuliang,jdbcType=VARCHAR},</if>      <if test="caigoushijian != null"> #{caigoushijian,jdbcType=VARCHAR},</if>      <if test="caigouyuan != null"> #{caigouyuan,jdbcType=VARCHAR},</if>      <if test="tuihuoshuliang != null"> #{tuihuoshuliang,jdbcType=VARCHAR},</if>      <if test="tuihuoyuanyin != null"> #{tuihuoyuanyin,jdbcType=VARCHAR},</if>      
+      <if test="addtime != null">
+        #{addtime,jdbcType=VARCHAR},
+      </if>
+      
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Caigou">
+    update caigou
+    <set>
+	  <if test="shangpinbianhao != null"> shangpinbianhao = #{shangpinbianhao,jdbcType=VARCHAR},</if>      <if test="shangpinmingcheng != null"> shangpinmingcheng = #{shangpinmingcheng,jdbcType=VARCHAR},</if>      <if test="leibie != null"> leibie = #{leibie,jdbcType=VARCHAR},</if>      <if test="kucun != null"> kucun = #{kucun,jdbcType=VARCHAR},</if>      <if test="gongyingshang != null"> gongyingshang = #{gongyingshang,jdbcType=VARCHAR},</if>      <if test="caigoushuliang != null"> caigoushuliang = #{caigoushuliang,jdbcType=VARCHAR},</if>      <if test="caigoushijian != null"> caigoushijian = #{caigoushijian,jdbcType=VARCHAR},</if>      <if test="caigouyuan != null"> caigouyuan = #{caigouyuan,jdbcType=VARCHAR},</if>      <if test="tuihuoshuliang != null"> tuihuoshuliang = #{tuihuoshuliang,jdbcType=VARCHAR},</if>      <if test="tuihuoyuanyin != null"> tuihuoyuanyin = #{tuihuoyuanyin,jdbcType=VARCHAR},</if>      
+      <if test="addtime != null">
+        addtime = #{addtime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateByPrimaryKeySelectivelb" parameterType="com.entity.Caigou">
+    update caigou
+    <set>
+      <if test="tuihuoshuliang != null"> tuihuoshuliang = #{tuihuoshuliang,jdbcType=VARCHAR},</if>      <if test="tuihuoyuanyin != null"> tuihuoyuanyin = #{tuihuoyuanyin,jdbcType=VARCHAR},</if>      
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.entity.Caigou">
+    update caigou
+    set shangpinbianhao = #{shangpinbianhao,jdbcType=VARCHAR},shangpinmingcheng = #{shangpinmingcheng,jdbcType=VARCHAR},leibie = #{leibie,jdbcType=VARCHAR},kucun = #{kucun,jdbcType=VARCHAR},gongyingshang = #{gongyingshang,jdbcType=VARCHAR},caigoushuliang = #{caigoushuliang,jdbcType=VARCHAR},caigoushijian = #{caigoushijian,jdbcType=VARCHAR},caigouyuan = #{caigouyuan,jdbcType=VARCHAR},tuihuoshuliang = #{tuihuoshuliang,jdbcType=VARCHAR},tuihuoyuanyin = #{tuihuoyuanyin,jdbcType=VARCHAR},  addtime = #{addtime,jdbcType=VARCHAR} where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
